@@ -68,6 +68,22 @@ class BruteCollinearPointsTest {
   }
 
   @Test
+  public void testHorizontalSegment() {
+    Point[] points = {
+        new Point(1, 1), new Point(2, 1), new Point(3, 1), new Point(4, 1),
+        new Point(23000, 8500), new Point(29550, 8500), new Point(30000, 8500),
+        new Point(30950, 8500)
+    };
+    FastCollinearPoints collinear = new FastCollinearPoints(points);
+    assertEquals(2, collinear.numberOfSegments());
+    LineSegment[] segments = collinear.segments();
+    assertEquals(new LineSegment(new Point(1, 1), new Point(4, 1)).toString(),
+        segments[0].toString());
+    assertEquals(new LineSegment(new Point(23000, 8500), new Point(30950, 8500)).toString(),
+        segments[1].toString());
+  }
+
+  @Test
   public void testNullInput() {
     assertThrows(IllegalArgumentException.class, () -> new BruteCollinearPoints(null));
   }

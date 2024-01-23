@@ -84,7 +84,6 @@ class FastCollinearPointsTest {
         segments[1].toString());
   }
 
-
   @Test
   public void testNullInput() {
     assertThrows(IllegalArgumentException.class, () -> new FastCollinearPoints(null));
