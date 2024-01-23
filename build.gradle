@@ -17,7 +17,8 @@ repositories {
 }
 
 java {
-    sourceCompatibility = '8'
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
 }
 
 
@@ -55,11 +56,8 @@ build {
 }
 
 def excludeCoverage = [
-        "per/duyd/**/dto/**",
-        "per/duyd/**/entity/**",
-        "per/duyd/**/enums/**",
-        "per/duyd/**/exception/**",
-        "per/duyd/**/TicketTransactionApplication**"
+        "per/duyd/training/dsaa/collinearpoints/LineSegment**",
+        "per/duyd/training/dsaa/collinearpoints/Point**"
 ]
 
 jacocoTestReport {

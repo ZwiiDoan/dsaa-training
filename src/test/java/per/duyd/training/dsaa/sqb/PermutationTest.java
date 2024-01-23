@@ -1,10 +1,10 @@
 package per.duyd.training.dsaa.sqb;
 
+import static per.duyd.training.dsaa.util.TestResourceUtil.readFileFromClasspath;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,8 @@ class PermutationTest {
   public void testMain() {
     InputStream originalIn = System.in;
     try (
-        ByteArrayInputStream in = new ByteArrayInputStream(readFileFromClasspath("distinct.txt"))) {
+        ByteArrayInputStream in = new ByteArrayInputStream(
+            readFileFromClasspath("sqb/distinct.txt"))) {
       System.setIn(in);
 
       // Call the main method with arguments
@@ -24,9 +25,5 @@ class PermutationTest {
     } finally {
       System.setIn(originalIn);
     }
-  }
-
-  private byte[] readFileFromClasspath(String fileName) throws IOException {
-    return Files.readAllBytes(Paths.get("src/test/resources/" + fileName));
   }
 }
