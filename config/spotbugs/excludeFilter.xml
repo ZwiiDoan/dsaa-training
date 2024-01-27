@@ -6,4 +6,12 @@
     <Match>
         <Bug pattern="EI_EXPOSE_REP2"/>
     </Match>
+    <Match>
+        <Bug pattern="HE_EQUALS_USE_HASHCODE"/>
+        <Class name="per.duyd.training.dsaa.sliderpuzzle.Board"/>
+    </Match>
+    <Match>
+        <Bug pattern="EQ_COMPARETO_USE_OBJECT_EQUALS"/>
+        <Class name="per.duyd.training.dsaa.collinearpoints.Point"/>
+    </Match>
 </FindBugsFilter>
