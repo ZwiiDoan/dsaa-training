@@ -1,13 +1,13 @@
 package per.duyd.training.dsaa.sliderpuzzle;
 
 import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.StdOut;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class Solver {
   private final List<Board> solution;
@@ -23,20 +23,25 @@ public class Solver {
     BoardNode initialNode = new BoardNode(null, initial, 0);
     BoardNode twinNode = new BoardNode(null, initial.twin(), 0);
 
-    MinPQ<BoardNode> minPQ = new MinPQ<>(new BoardNodeComparator());
-    minPQ.insert(initialNode);
-    MinPQ<BoardNode> twinMinPQ = new MinPQ<>(new BoardNodeComparator());
-    twinMinPQ.insert(twinNode);
+//    MinPQ<BoardNode> minPQ = new MinPQ<>(new BoardNodeComparator());
+//    minPQ.insert(initialNode);
+//    MinPQ<BoardNode> twinMinPQ = new MinPQ<>(new BoardNodeComparator());
+//    twinMinPQ.insert(twinNode);
+
+    PriorityQueue<BoardNode> minPQ = new PriorityQueue<>(new BoardNodeComparator());
+    minPQ.add(initialNode);
+    PriorityQueue<BoardNode> twinMinPQ = new PriorityQueue<>(new BoardNodeComparator());
+    twinMinPQ.add(twinNode);
 
     BoardNode minNode, twinMinNode;
     while (true) {
-      minNode = minPQ.delMin();
+      minNode = minPQ.remove();
       if (minNode.board.isGoal()) {
         this.isSolvable = true;
         break;
       }
 
-      twinMinNode = twinMinPQ.delMin();
+      twinMinNode = twinMinPQ.remove();
       if (twinMinNode.board.isGoal()) {
         this.isSolvable = false;
         break;
@@ -44,13 +49,13 @@ public class Solver {
 
       for (Board neighbor : minNode.board.neighbors()) {
         if (boardHasNotBeenProcessed(neighbor, minNode)) {
-          minPQ.insert(new BoardNode(minNode, neighbor, minNode.moves + 1));
+          minPQ.add(new BoardNode(minNode, neighbor, minNode.moves + 1));
         }
       }
 
       for (Board twinNeighbor : twinMinNode.board.neighbors()) {
         if (boardHasNotBeenProcessed(twinNeighbor, twinMinNode)) {
-          twinMinPQ.insert(new BoardNode(twinMinNode, twinNeighbor, twinMinNode.moves + 1));
+          twinMinPQ.add(new BoardNode(twinMinNode, twinNeighbor, twinMinNode.moves + 1));
         }
       }
     }
