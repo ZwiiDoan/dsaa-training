@@ -1,6 +1,6 @@
 package per.duyd.training.dsaa.sqb;
 
-import static per.duyd.training.dsaa.util.TestResourceUtil.readFileFromClasspath;
+import static per.duyd.training.dsaa.util.TestResourceUtil.readTestFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -14,7 +14,7 @@ class PermutationTest {
     InputStream originalIn = System.in;
     try (
         ByteArrayInputStream in = new ByteArrayInputStream(
-            readFileFromClasspath("sqb/distinct.txt"))) {
+            readTestFile("sqb/distinct.txt"))) {
       System.setIn(in);
 
       // Call the main method with arguments

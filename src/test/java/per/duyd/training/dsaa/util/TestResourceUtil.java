@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class TestResourceUtil {
-  public static byte[] readFileFromClasspath(String fileName) throws IOException {
+  public static byte[] readTestFile(String fileName) throws IOException {
     return Files.readAllBytes(Paths.get("src/test/resources/" + fileName));
   }
 }

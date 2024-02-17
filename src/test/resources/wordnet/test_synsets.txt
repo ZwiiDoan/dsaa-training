@@ -1,0 +1,10 @@
+0,bird
+1,vertebrate
+2,animal
+3,cat
+4,dog
+5,organism
+6,mammal
+7,entity
+8,physical_entity
+9,plant
