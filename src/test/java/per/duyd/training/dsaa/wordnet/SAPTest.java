@@ -140,7 +140,7 @@ class SAPTest {
   }
 
   @ParameterizedTest
-  @CsvSource({"3,11,4,1", "9,12,3,5", "7,2,4,0", "1,6,-1,-1"})
+  @CsvSource({"3,11,4,1", "9,12,3,5", "7,2,4,0", "1,6,-1,-1", "9,12,3,5"})
   public void testSampleTestData(int v, int w, int length, int ancestor) {
     Digraph digraph = new Digraph(new In("wordnet/digraph1.txt"));
     SAP sap = new SAP(digraph);

@@ -61,6 +61,7 @@ class PointSETTest {
     List<Point2D> expectedPoints = Arrays.asList(new Point2D(0.4, 0.4), new Point2D(0.7, 0.7));
     Assertions.assertEquals(expectedPoints, StreamSupport.stream(pointsInRange.spliterator(),
         false).collect(Collectors.toList()));
+    set.draw();
   }
 
   @Test

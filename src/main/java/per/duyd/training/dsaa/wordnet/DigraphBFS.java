@@ -72,7 +72,7 @@ public class DigraphBFS {
     return marked.get(v) != null;
   }
 
-  public Integer distTo(int v) {
+  public int distTo(int v) {
     validateVertex(v);
     Integer distance = distTo.get(v);
     return distance == null ? Integer.MAX_VALUE : distance;
@@ -81,7 +81,7 @@ public class DigraphBFS {
   public Iterable<Integer> pathTo(int v) {
     Stack<Integer> path = new Stack<>();
     Integer w = v;
-    
+
     while (w != null) {
       path.push(w);
       w = edgeTo.get(w);

@@ -92,6 +92,7 @@ class KdTreeTest {
 
     // Verify that the correct nearest neighbor is returned
     assertEquals(p2, nearestPoint);
+    tree.draw();
   }
 
 }
