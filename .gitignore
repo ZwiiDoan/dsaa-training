@@ -39,3 +39,4 @@ bin/
 .DS_Store
 *.zip
 /slides/
+/src/test/resources/**/out/

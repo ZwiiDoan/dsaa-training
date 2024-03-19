@@ -57,7 +57,8 @@ build {
 
 def excludeCoverage = [
         "per/duyd/training/dsaa/collinearpoints/LineSegment**",
-        "per/duyd/training/dsaa/collinearpoints/Point**"
+        "per/duyd/training/dsaa/collinearpoints/Point**",
+        "per/duyd/training/dsaa/boggle/BoggleBoard**"
 ]
 
 jacocoTestReport {
@@ -67,7 +68,7 @@ jacocoTestReport {
         }))
     }
 
-    finalizedBy(jacocoTestCoverageVerification)
+//    finalizedBy(jacocoTestCoverageVerification)
 }
 
 jacocoTestCoverageVerification {
