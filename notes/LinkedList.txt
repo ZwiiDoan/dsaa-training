@@ -1,0 +1,34 @@
+
+
+1   2   3   4   5   6   null
+s   s   s   s                   =>  s = 4, mid = s - 1 = 3
+f       f       f       f       
+
+reverse linked list from "s":
+prev = null, curr = 4, next = curr.next = 5
+curr.next = prev, prev = curr, curr = next
+
+1   2   3   6   5   4
+s   s   s
+            f   f   f           => repeat "mid" times, result = max(s + f)
+
+
+1   2   3   4   5
+
+prev = null, head = 1, head.next = 2, head.next.next = 3
+
+if (prev != null) {
+    prev.next = head.next;
+}
+prev = head;
+
+nextNode = head.next.next,
+head.next.next = head,
+head.next = nextNode,
+head = nextNode
+
+
+
+1 -> 2 <- 3 <- 4 -> 5
+
+1 -> 4 -> 3 -> 2 -> 5

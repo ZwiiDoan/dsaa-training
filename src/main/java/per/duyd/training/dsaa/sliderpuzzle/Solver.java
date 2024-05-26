@@ -2,6 +2,7 @@ package per.duyd.training.dsaa.sliderpuzzle;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -94,6 +95,7 @@ public class Solver {
 
   private static class BoardNodeComparator implements Comparator<BoardNode>, Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override

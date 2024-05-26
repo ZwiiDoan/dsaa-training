@@ -1,0 +1,32 @@
+===== Simplify Path
+Input                   | Expected
+/home/../user/name      | /user/name         
+/../                    | /
+../user/name            | /user/name                     
+/home/.../user/name     | /home/.../user/name     
+/home//user/name        | /home/user/name        
+/home/user/name/        | /home/user/name         
+home/user/name          | /home/user/name   
+
+
+===== Online Stock Span
+Input:  [100]    [80]    [60]    
+Output: [1]      [1]     [1]
+
+Input:  [100]    [80]    [70]
+Output: [1]      [1]     [2]
+
+Input:  [100]    [80]    [70]   [60]
+Output: [1]      [1]     [2]    [1]
+
+Input:  [100]    [80]    [70]   [65]
+Output: [1]      [1]     [2]    [2]
+
+Input:  [100]    [80]    [75]
+Output: [1]      [1]     [5]
+
+Input:  [100]    [80]    [75]   [80]
+Output: [1]      [1]     [5]    [1]
+
+Input:  [100]    [85]
+Output: [1]      [8]
