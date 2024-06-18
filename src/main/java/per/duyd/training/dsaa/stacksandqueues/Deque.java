@@ -1,4 +1,4 @@
-package per.duyd.training.dsaa.sqb;
+package per.duyd.training.dsaa.stacksandqueues;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

@@ -1,4 +1,4 @@
-package per.duyd.training.dsaa.sqb;
+package per.duyd.training.dsaa.stacksandqueues;
 
 import edu.princeton.cs.algs4.StdRandom;
 import java.util.Iterator;

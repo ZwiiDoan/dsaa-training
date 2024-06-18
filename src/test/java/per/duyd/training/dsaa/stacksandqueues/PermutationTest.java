@@ -1,4 +1,4 @@
-package per.duyd.training.dsaa.sqb;
+package per.duyd.training.dsaa.stacksandqueues;
 
 import static per.duyd.training.dsaa.util.TestResourceUtil.readTestFile;
 
