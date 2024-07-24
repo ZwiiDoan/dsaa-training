@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
 
 public class Graphs {
   public int findJudge(int n, int[][] trust) {
@@ -101,5 +102,52 @@ public class Graphs {
 
   private boolean isValidCell(int row, int col, int maxRow, int maxCol) {
     return row >= 0 && row < maxRow && col >= 0 && col < maxCol;
+  }
+
+  public int numEnclaves(int[][] grid) {
+    int maxRow = grid.length, maxCol = grid[0].length;
+    boolean[][] seen = new boolean[maxRow][maxCol];
+    Stack<int[]> stack = new Stack<>();
+
+    int ans = 0;
+
+    for (int i = 1; i < maxRow; i++) {
+      for (int j = 1; j < maxCol; j++) {
+        if (!seen[i][j] && grid[i][j] == 1) {
+          seen[i][j] = true;
+          stack.push(new int[] {i, j});
+          ans += dfsEnclaves(seen, stack, grid);
+        }
+      }
+    }
+
+    return ans;
+  }
+
+  private int dfsEnclaves(boolean[][] seen, Stack<int[]> stack, int[][] grid) {
+    int maxRow = grid.length, maxCol = grid[0].length;
+    boolean isValidEnclaves = true;
+    int enclaves = 1;
+
+    while (!stack.isEmpty()) {
+      int[] cell = stack.pop();
+      int row = cell[0];
+      int col = cell[1];
+
+      for (int[] direction : DIRECTIONS) {
+        int nextRow = row + direction[0];
+        int nextCol = col + direction[1];
+
+        if (!isValidCell(nextRow, nextCol, maxRow, maxCol)) {
+          isValidEnclaves = false;
+        } else if (!seen[nextRow][nextCol] && grid[nextRow][nextCol] == 1) {
+          seen[nextRow][nextCol] = true;
+          stack.push(new int[] {nextRow, nextCol});
+          enclaves++;
+        }
+      }
+    }
+
+    return isValidEnclaves ? enclaves : 0;
   }
 }

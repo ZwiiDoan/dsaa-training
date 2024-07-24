@@ -3,7 +3,6 @@ package per.duyd.training.dsaa.linkedlist;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static per.duyd.training.dsaa.linkedlist.FastAndSlowPointers.ListNode;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,8 +17,8 @@ class FastAndSlowPointersTest {
   public static Stream<Arguments> deleteMiddleParams() {
     ListNode head1 = new ListNode(1, new ListNode(3,
         new ListNode(4, new ListNode(7, new ListNode(1, new ListNode(2, new ListNode(6)))))));
-    ListNode expected1 = new ListNode(1, new ListNode(3,
-        new ListNode(4, new ListNode(1, new ListNode(2, new ListNode(6))))));
+    ListNode expected1 = new ListNode(1,
+        new ListNode(3, new ListNode(4, new ListNode(1, new ListNode(2, new ListNode(6))))));
 
     ListNode head2 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))));
     ListNode expected2 = new ListNode(1, new ListNode(2, new ListNode(4)));
@@ -27,12 +26,18 @@ class FastAndSlowPointersTest {
     ListNode head3 = new ListNode(2, new ListNode(1));
     ListNode expected3 = new ListNode(2);
 
-    return Stream.of(
-        Arguments.of("LinkedList has odd number of nodes", head1, expected1),
+    return Stream.of(Arguments.of("LinkedList has odd number of nodes", head1, expected1),
         Arguments.of("LinkedList has even number of nodes", head2, expected2),
         Arguments.of("LinkedList has 2 nodes", head3, expected3),
-        Arguments.of("LinkedList has 1 node", new ListNode(1), null)
-    );
+        Arguments.of("LinkedList has 1 node", new ListNode(1), null));
+  }
+
+  public static Stream<Arguments> removeNthFromEndParams() {
+    return Stream.of(Arguments.of("Example 1",
+            new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5))))), 2,
+            new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(5))))),
+        Arguments.of("Example 2", new ListNode(1), 1, null),
+        Arguments.of("Example 3", new ListNode(1, new ListNode(2)), 1, new ListNode(1)));
   }
 
   @BeforeEach
@@ -50,6 +55,21 @@ class FastAndSlowPointersTest {
       assertEquals(expected.val, actual.val);
       actual = actual.next;
       expected = expected.next;
+    }
+
+    assertNull(actual);
+  }
+
+
+  @ParameterizedTest(name = "{0}")
+  @MethodSource("removeNthFromEndParams")
+  void removeNthFromEnd(String description, ListNode head, int n, ListNode expected) {
+    ListNode actual = fastAndSlowPointers.removeNthFromEnd(head, n);
+
+    while (expected != null) {
+      assertEquals(expected.val, actual.val);
+      expected = expected.next;
+      actual = actual.next;
     }
 
     assertNull(actual);

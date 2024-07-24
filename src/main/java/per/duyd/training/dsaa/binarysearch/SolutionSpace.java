@@ -81,4 +81,40 @@ public class SolutionSpace {
 
     return splitCount + 1 <= k;
   }
+
+  public long minimumTime(int[] time, int totalTrips) {
+    int minTime = Integer.MAX_VALUE;
+    for (int t : time) {
+      minTime = Math.min(minTime, t);
+    }
+
+    long left = 1, right = (long) totalTrips * minTime, ans = 1;
+
+    while (left <= right) {
+      long mid = left + (right - left) / 2;
+
+      if (isTotalTripsCompleted(mid, time, totalTrips)) {
+        ans = mid;
+        right = mid - 1;
+      } else {
+        left = mid + 1;
+      }
+    }
+
+    return ans;
+  }
+
+  private boolean isTotalTripsCompleted(long totalTime, int[] time, int totalTrips) {
+    long completedTrips = 0;
+
+    for (int t : time) {
+      completedTrips += totalTime / t;
+
+      if (completedTrips >= totalTrips) {
+        break;
+      }
+    }
+
+    return completedTrips >= totalTrips;
+  }
 }

@@ -21,16 +21,33 @@ class GraphsTest {
   }
 
   public static Stream<Arguments> maximalNetworkRankParams() {
-    return Stream.of(
-        Arguments.of("Example 1", 4, new int[][] {{0, 1}, {0, 3}, {1, 2}, {1, 3}}, 4),
+    return Stream.of(Arguments.of("Example 1", 4, new int[][] {{0, 1}, {0, 3}, {1, 2}, {1, 3}}, 4),
         Arguments.of("Example 2", 5, new int[][] {{0, 1}, {0, 3}, {1, 2}, {1, 3}, {2, 3}, {2, 4}},
             5),
         Arguments.of("Example 3", 8, new int[][] {{0, 1}, {1, 2}, {2, 3}, {2, 4}, {5, 6}, {5, 7}},
-            5),
-        Arguments.of("Given no roads, should return maxRank = 0", 2, new int[][] {}, 0),
+            5), Arguments.of("Given no roads, should return maxRank = 0", 2, new int[][] {}, 0),
         Arguments.of("Given not all cities are connected, should return maxRank", 6,
-            new int[][] {{2, 4}}, 1)
-    );
+            new int[][] {{2, 4}}, 1));
+  }
+
+  public static Stream<Arguments> numEnclavesParams() {
+    return Stream.of(Arguments.of("Example 1",
+            new int[][] {{0, 0, 0, 0}, {1, 0, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}}, 3),
+        Arguments.of("Example 2",
+            new int[][] {{0, 1, 1, 0}, {0, 0, 1, 0}, {0, 0, 1, 0}, {0, 0, 0, 0}}, 0),
+        Arguments.of("Example 3",
+            new int[][] {
+                {0, 0, 0, 1, 1, 1, 0, 1, 0, 0},
+                {1, 1, 0, 0, 0, 1, 0, 1, 1, 1},
+                {0, 0, 0, 1, 1, 1, 0, 1, 0, 0},
+                {0, 1, 1, 0, 0, 0, 1, 0, 1, 0},
+                {0, 1, 1, 1, 1, 1, 0, 0, 1, 0},
+                {0, 0, 1, 0, 1, 1, 1, 1, 0, 1},
+                {0, 1, 1, 0, 0, 0, 1, 1, 1, 1},
+                {0, 0, 1, 0, 0, 1, 0, 1, 0, 1},
+                {1, 0, 1, 0, 1, 1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 1, 1, 0, 0, 0, 1}},
+            3));
   }
 
   @BeforeEach
@@ -51,25 +68,22 @@ class GraphsTest {
   }
 
   public static Stream<Arguments> islandPerimeterParams() {
-    return Stream.of(
-        Arguments.of(
-            "Example 1", new int[][] {{0, 1, 0, 0}, {1, 1, 1, 0}, {0, 1, 0, 0}, {1, 1, 0, 0}}, 16
-        ),
-        Arguments.of(
-            "Example 2", new int[][] {{1}}, 4
-        ),
-        Arguments.of(
-            "Example 3", new int[][] {{1, 0}}, 4
-        ),
-        Arguments.of(
-            "Example 4", new int[][] {{0, 1}}, 4
-        )
-    );
+    return Stream.of(Arguments.of("Example 1",
+            new int[][] {{0, 1, 0, 0}, {1, 1, 1, 0}, {0, 1, 0, 0}, {1, 1, 0, 0}}, 16),
+        Arguments.of("Example 2", new int[][] {{1}}, 4),
+        Arguments.of("Example 3", new int[][] {{1, 0}}, 4),
+        Arguments.of("Example 4", new int[][] {{0, 1}}, 4));
   }
 
   @ParameterizedTest(name = "{0}")
   @MethodSource("islandPerimeterParams")
   void islandPerimeter(String description, int[][] grid, int expected) {
     assertEquals(expected, graphs.islandPerimeter(grid));
+  }
+
+  @ParameterizedTest(name = "{0}")
+  @MethodSource("numEnclavesParams")
+  void numEnclaves(String description, int[][] grid, int expected) {
+    assertEquals(expected, graphs.numEnclaves(grid));
   }
 }

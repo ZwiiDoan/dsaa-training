@@ -17,6 +17,14 @@ class CheckingForExistenceTest {
         Arguments.of("Array contains duplicate 2", new int[] {1, 1, 1, 3, 3, 4, 3, 2, 4, 2}, true));
   }
 
+  public static Stream<Arguments> testDestinationCityParams() {
+    return Stream.of(Arguments.of("Example 1",
+            new String[][] {{"London", "New York"}, {"New York", "Lima"}, {"Lima", "Sao Paulo"}},
+            "Sao Paulo"),
+        Arguments.of("Example 2", new String[][] {{"B", "C"}, {"D", "B"}, {"C", "A"}}, "A"),
+        Arguments.of("Example 3", new String[][] {{"A", "Z"}}, "Z"));
+  }
+
   @BeforeEach
   void setUp() {
     checkingForExistence = new CheckingForExistence();
@@ -26,5 +34,11 @@ class CheckingForExistenceTest {
   @MethodSource("testContainsDuplicateParams")
   void testContainsDuplicate(String description, int[] nums, boolean expected) {
     assertEquals(expected, checkingForExistence.containsDuplicate(nums));
+  }
+
+  @ParameterizedTest(name = "{0}")
+  @MethodSource("testDestinationCityParams")
+  void testDestinationCity(String description, String[][] paths, String expected) {
+    assertEquals(expected, checkingForExistence.destinationCity(paths));
   }
 }

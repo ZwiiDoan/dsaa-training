@@ -23,6 +23,14 @@ class GreedyTest {
     );
   }
 
+  public static Stream<Arguments> longestPalindromeParams() {
+    return Stream.of(
+        Arguments.of("Example 1", "abccccdd", 7),
+        Arguments.of("Example 2", "a", 1),
+        Arguments.of("Example 3", "bb", 2)
+    );
+  }
+
   @BeforeEach
   void setUp() {
     greedy = new Greedy();
@@ -38,5 +46,11 @@ class GreedyTest {
   @MethodSource("maxIceCreamParams")
   void maxIceCream2(String description, int[] costs, int coin, int expected) {
     assertEquals(expected, greedy.maxIceCream2(costs, coin));
+  }
+
+  @ParameterizedTest(name = "{0}")
+  @MethodSource("longestPalindromeParams")
+  void longestPalindrome(String description, String s, int expected) {
+    assertEquals(expected, greedy.longestPalindrome(s));
   }
 }

@@ -1,7 +1,6 @@
 package per.duyd.training.dsaa.linkedlist;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static per.duyd.training.dsaa.linkedlist.ReversingLinkedList.ListNode;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;

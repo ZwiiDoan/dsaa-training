@@ -2,6 +2,7 @@ package per.duyd.training.dsaa.binarysearch;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,6 +29,18 @@ class SolutionSpaceTest {
     );
   }
 
+  public static Stream<Arguments> minimumTimeParams() {
+    int[] time = new int[100000];
+    Arrays.fill(time, 1);
+
+    return Stream.of(
+        Arguments.of("Example 1", new int[] {1, 2, 3}, 5, 3),
+        Arguments.of("Example 2", new int[] {2}, 1, 2),
+        Arguments.of("Example 3", new int[] {10000}, 10000000, 100000000000L),
+        Arguments.of("Example 4", time, 10000000, 100)
+    );
+  }
+
   @BeforeEach
   void setUp() {
     solutionSpace = new SolutionSpace();
@@ -35,13 +48,19 @@ class SolutionSpaceTest {
 
   @ParameterizedTest(name = "{0}")
   @MethodSource("maxMinSweetnessPieceParams")
-  void maxMinSweetnessPiece(String description, int[] sweetness, int k, int expected) {
+  void maxMinSweetnessPiece(String description, int[] sweetness, int k, long expected) {
     assertEquals(expected, solutionSpace.maxMinSweetnessPiece(sweetness, k));
   }
 
   @ParameterizedTest(name = "{0}")
   @MethodSource("minLargestSubArraySumParams")
-  void minLargestSubArraySum(String description, int[] nums, int k, int expected) {
+  void minLargestSubArraySum(String description, int[] nums, int k, long expected) {
     assertEquals(expected, solutionSpace.minLargestSubArraySum(nums, k));
+  }
+
+  @ParameterizedTest(name = "{0}")
+  @MethodSource("minimumTimeParams")
+  void minimumTime(String description, int[] time, int totalTrips, long expected) {
+    assertEquals(expected, solutionSpace.minimumTime(time, totalTrips));
   }
 }

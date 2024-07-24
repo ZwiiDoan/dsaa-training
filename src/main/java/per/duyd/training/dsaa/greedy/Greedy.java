@@ -1,7 +1,10 @@
 package per.duyd.training.dsaa.greedy;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Greedy {
   public int maxIceCream(int[] costs, int coins) {
@@ -55,5 +58,24 @@ public class Greedy {
     }
 
     return ans;
+  }
+
+  public int longestPalindrome(String s) {
+    Map<Character, Long> charMap = s.chars().mapToObj(c -> (char) c)
+        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+    long ans = 0;
+    boolean oddFound = false;
+    for (Character c : charMap.keySet()) {
+      long charCount = charMap.get(c);
+      if (charCount % 2 != 0) {
+        ans += charCount - 1;
+        oddFound = true;
+      } else {
+        ans += charCount;
+      }
+    }
+
+    return (int) (oddFound ? ans + 1 : ans);
   }
 }

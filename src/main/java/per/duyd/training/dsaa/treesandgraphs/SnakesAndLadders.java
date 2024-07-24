@@ -1,4 +1,4 @@
-package per.duyd.training.dsaa.graph;
+package per.duyd.training.dsaa.treesandgraphs;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -18,6 +18,13 @@ class CountingTest {
         Arguments.of("All elements are, sum is 15", new int[] {1, 2, 3, 4, 5}, 15));
   }
 
+  public static Stream<Arguments> totalMaxFrequenciesParams() {
+    return Stream.of(
+        Arguments.of("Example 1", new int[] {1, 2, 2, 3, 1, 4}, 4),
+        Arguments.of("Example 2", new int[] {1, 2, 3, 4, 5}, 5)
+    );
+  }
+
   @BeforeEach
   void setUp() {
     counting = new Counting();
@@ -25,7 +32,13 @@ class CountingTest {
 
   @ParameterizedTest(name = "{0}")
   @MethodSource("sumOfUniqueParams")
-  void sumOfUnique(String description, int[] nums, int expected) {
+  void testSumOfUnique(String description, int[] nums, int expected) {
     assertEquals(expected, counting.sumOfUnique(nums));
+  }
+
+  @ParameterizedTest(name = "{0}")
+  @MethodSource("totalMaxFrequenciesParams")
+  void testTotalMaxFrequencies(String description, int[] nums, int expected) {
+    assertEquals(expected, counting.totalMaxFrequencies(nums));
   }
 }

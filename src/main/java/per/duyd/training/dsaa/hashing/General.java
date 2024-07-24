@@ -2,6 +2,7 @@ package per.duyd.training.dsaa.hashing;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class General {
   public boolean isIsomorphic(String s, String t) {
@@ -15,20 +16,6 @@ public class General {
     }
 
     return true;
-
-    /*
-    Example 3:
-    Input: s = "paper", t = "title"
-    Output: true
-    stCharsMap: [p -> t, a -> i, e -> l, r -> e]
-    tsCharsMap: [t -> p, i -> a, l -> e, e -> r]
-
-    Example 2:
-    Input: s = "foo", t = "bar"
-    Output: false
-    stCharsMap: [f -> b, o -> a,r] => false
-    stCharsMap: [b -> f, a -> o, r -> o]
-     */
   }
 
   private boolean hasMultipleMappings(String s, String t, int i,
@@ -45,4 +32,24 @@ public class General {
 
     return false;
   }
+
+  public boolean followsPattern(String pattern, String s) {
+    String[] words = s.split(" ");
+
+    if (words.length != pattern.length()) {
+      return false;
+    }
+
+    Map<Character, Integer> charIndexMap = new HashMap<>();
+    Map<String, Integer> wordIndexMap = new HashMap<>();
+
+    for (int i = 0; i < words.length; i++) {
+      if (!Objects.equals(wordIndexMap.put(words[i], i), charIndexMap.put(pattern.charAt(i), i))) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
 }

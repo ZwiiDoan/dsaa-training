@@ -1,26 +1,6 @@
 package per.duyd.training.dsaa.linkedlist;
 
 public class FastAndSlowPointers {
-  /**
-   * Definition for singly-linked list.
-   */
-  public static class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode() {
-    }
-
-    ListNode(int val) {
-      this.val = val;
-    }
-
-    ListNode(int val, ListNode next) {
-      this.val = val;
-      this.next = next;
-    }
-  }
-
   public ListNode deleteMiddle(ListNode head) {
     if (head == null || head.next == null) {
       return null;
@@ -53,5 +33,30 @@ public class FastAndSlowPointers {
     Output: [2]
     fast = null, slow = 2
      */
+  }
+
+  public ListNode removeNthFromEnd(ListNode head, int n) {
+    ListNode dummyHead = new ListNode(-1);
+    dummyHead.next = head;
+
+    ListNode first = dummyHead;
+    ListNode second = dummyHead;
+    int i = 0;
+
+    while (i <= n && second != null) {
+      i++;
+      second = second.next;
+    }
+
+    while (second != null) {
+      first = first.next;
+      second = second.next;
+    }
+
+    ListNode removed = first.next;
+    first.next = first.next.next;
+    removed.next = null;
+
+    return dummyHead.next;
   }
 }

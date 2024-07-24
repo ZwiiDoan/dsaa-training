@@ -29,4 +29,23 @@ public class Heaps {
 
     return ans;
   }
+
+  public static class SeatManager {
+    private final PriorityQueue<Integer> minPQ;
+
+    public SeatManager(int n) {
+      minPQ = new PriorityQueue<>(n);
+      for (int i = 1; i <= n; i++) {
+        minPQ.add(i);
+      }
+    }
+
+    public int reserve() {
+      return minPQ.remove();
+    }
+
+    public void unreserve(int seatNumber) {
+      minPQ.add(seatNumber);
+    }
+  }
 }

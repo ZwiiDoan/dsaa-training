@@ -1,4 +1,4 @@
-package per.duyd.training.dsaa.graph;
+package per.duyd.training.dsaa.treesandgraphs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

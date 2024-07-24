@@ -12,7 +12,7 @@ class GeneralTest {
 
   private General general;
 
-  public static Stream<Arguments> isIsomorphicParams() {
+  public static Stream<Arguments> testIsomorphicParams() {
     return Stream.of(
         Arguments.of("2 Strings are isomorphic", "egg", "add", true),
         Arguments.of("2 Strings are NOT isomorphic", "foo", "bar", false),
@@ -22,14 +22,33 @@ class GeneralTest {
     );
   }
 
+  public static Stream<Arguments> testFollowsPatternParams() {
+    return Stream.of(
+//        Arguments.of("String s follows pattern 1", "abba", "dog cat cat dog", true),
+//        Arguments.of("String s does not follow pattern 1", "abba", "dog cat cat fish", false),
+//        Arguments.of("String s does not follow pattern 2", "aaaa", "dog cat cat dog", false),
+//        Arguments.of("String s does not follow pattern 3", "abba", "dog dog dog dog", false),
+        Arguments.of("String s follows pattern 2",
+            "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccdd",
+            "s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s s t t",
+            true)
+    );
+  }
+
   @BeforeEach
   void setUp() {
     general = new General();
   }
 
   @ParameterizedTest(name = "{0}")
-  @MethodSource("isIsomorphicParams")
-  void isIsomorphic(String description, String s, String t, boolean expected) {
+  @MethodSource("testIsomorphicParams")
+  void testIsIsomorphic(String description, String s, String t, boolean expected) {
     assertEquals(expected, general.isIsomorphic(s, t));
+  }
+
+  @ParameterizedTest(name = "{0}")
+  @MethodSource("testFollowsPatternParams")
+  void testFollowsPattern(String description, String pattern, String s, boolean expected) {
+    assertEquals(expected, general.followsPattern(pattern, s));
   }
 }

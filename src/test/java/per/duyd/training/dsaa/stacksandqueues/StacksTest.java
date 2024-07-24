@@ -31,6 +31,16 @@ class StacksTest {
     );
   }
 
+  public static Stream<Arguments> robotWithStringParams() {
+    return Stream.of(
+        Arguments.of("Example 1", "zza", "azz"),
+        Arguments.of("Example 2", "bac", "abc"),
+        Arguments.of("Example 3", "bdda", "addb"),
+        Arguments.of("Example 4", "bydizfve", "bdevfziy"),
+        Arguments.of("Example 5", "mmuqezwmomeplrtskz", "eekstrlpmomwzqummz")
+    );
+  }
+
   @BeforeEach
   void setUp() {
     stacks = new Stacks();
@@ -46,5 +56,11 @@ class StacksTest {
   @MethodSource("removeStarsParams")
   void removeStars(String description, String s, String expected) {
     assertEquals(expected, stacks.removeStars(s));
+  }
+
+  @ParameterizedTest(name = "{0}")
+  @MethodSource("robotWithStringParams")
+  void robotWithString(String description, String s, String expected) {
+    assertEquals(expected, stacks.robotWithString(s));
   }
 }

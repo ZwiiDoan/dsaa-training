@@ -61,4 +61,30 @@ public class Stacks {
 
     return sb.toString();
   }
+
+  public String robotWithString(String s) {
+    Stack<Character> t = new Stack<>();
+    StringBuilder p = new StringBuilder();
+
+    int n = s.length();
+    char[] rightMin = new char[n];
+    rightMin[n - 1] = s.charAt(n - 1);
+    for (int i = n - 2; i >= 0; i--) {
+      rightMin[i] = s.charAt(i) < rightMin[i + 1] ? s.charAt(i) : rightMin[i + 1];
+    }
+
+    for (int i = 0; i < n; i++) {
+      char curr = s.charAt(i);
+      while (!t.isEmpty() && curr >= t.peek() && rightMin[i] >= t.peek()) {
+        p.append(t.pop());
+      }
+      t.push(curr);
+    }
+
+    while (!t.isEmpty()) {
+      p.append(t.pop());
+    }
+
+    return p.toString();
+  }
 }
