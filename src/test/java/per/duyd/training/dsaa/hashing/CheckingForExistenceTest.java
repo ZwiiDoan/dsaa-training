@@ -25,6 +25,13 @@ class CheckingForExistenceTest {
         Arguments.of("Example 3", new String[][] {{"A", "Z"}}, "Z"));
   }
 
+  public static Stream<Arguments> testIsPathCrossingParams() {
+    return Stream.of(
+        Arguments.of("Example 1", "NES", false),
+        Arguments.of("Example 2", "NESWW", true)
+    );
+  }
+
   @BeforeEach
   void setUp() {
     checkingForExistence = new CheckingForExistence();
@@ -40,5 +47,11 @@ class CheckingForExistenceTest {
   @MethodSource("testDestinationCityParams")
   void testDestinationCity(String description, String[][] paths, String expected) {
     assertEquals(expected, checkingForExistence.destinationCity(paths));
+  }
+
+  @ParameterizedTest(name = "{0}")
+  @MethodSource("testIsPathCrossingParams")
+  void testIsPathCrossing(String description, String path, boolean expected) {
+    assertEquals(expected, checkingForExistence.isPathCrossing(path));
   }
 }
