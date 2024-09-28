@@ -28,6 +28,34 @@ public class ReversingLinkedList {
     return ans;
   }
 
+  public long maxTwinSum(ListNode head) {
+    ListNode slow = head, fast = head;
+
+    while (fast != null && fast.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+
+    ListNode prev = null;
+    ListNode curr = slow;
+    while (curr != null) {
+      ListNode next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
+    }
+
+    ListNode start = head, end = prev;
+    int max = 0;
+    while (end != null) {
+      max = Math.max(max, end.val + start.val);
+      start = start.next;
+      end = end.next;
+    }
+
+    return max;
+  }
+
   private ListNode copyLinkedList(ListNode head) {
     ListNode headCopy = new ListNode(head.val), curr = head, currCopy = headCopy;
 

@@ -21,6 +21,17 @@ class ReversingLinkedListTest {
     );
   }
 
+  public static Stream<Arguments> maxTwinSumParams() {
+    return Stream.of(
+        Arguments.of("Example 1",
+            new ListNode(5, new ListNode(4, new ListNode(2, new ListNode(1)))), 6),
+        Arguments.of("Example 2",
+            new ListNode(4, new ListNode(2, new ListNode(2, new ListNode(3)))), 7),
+        Arguments.of("Example 1",
+            new ListNode(1, new ListNode(100000)), 100001)
+    );
+  }
+
   @BeforeEach
   void setUp() {
     reversingLinkedList = new ReversingLinkedList();
@@ -36,5 +47,11 @@ class ReversingLinkedListTest {
   @MethodSource("isPalindromeParams")
   void isPalindrome2(String description, ListNode head, boolean expected) {
     assertEquals(expected, reversingLinkedList.isPalindrome2(head));
+  }
+
+  @ParameterizedTest(name = "{0}")
+  @MethodSource("maxTwinSumParams")
+  void maxTwinSum(String description, ListNode head, long expected) {
+    assertEquals(expected, reversingLinkedList.maxTwinSum(head));
   }
 }

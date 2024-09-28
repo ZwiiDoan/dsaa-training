@@ -59,4 +59,55 @@ public class FastAndSlowPointers {
 
     return dummyHead.next;
   }
+
+  public ListNode deleteDuplicates(ListNode head) {
+    // Sentinel
+    ListNode sentinel = new ListNode(0, head);
+
+    // predecessor = the last node
+    // before the sublist of duplicates
+    ListNode pred = sentinel;
+
+    while (head != null) {
+      // If it's a beginning of the duplicates sublist
+      // skip all duplicates
+      if (head.next != null && head.val == head.next.val) {
+        // Move till the end of the duplicates sublist
+        while (head.next != null && head.val == head.next.val) {
+          head = head.next;
+        }
+
+        // Skip all duplicates
+        pred.next = head.next;
+        // otherwise, move predecessor
+      } else {
+        pred = pred.next;
+      }
+
+      // move forward
+      head = head.next;
+    }
+
+    return sentinel.next;
+  }
+
+  public ListNode swapNodes(ListNode head, int k) {
+    ListNode fast = head, last = head, first = head;
+
+    for (int i = 1; i < k; i++) {
+      fast = fast.next;
+      first = first.next;
+    }
+
+    while (fast.next != null) {
+      fast = fast.next;
+      last = last.next;
+    }
+
+    int tmp = first.val;
+    first.val = last.val;
+    last.val = tmp;
+
+    return head;
+  }
 }
