@@ -87,4 +87,100 @@ public class Stacks {
 
     return p.toString();
   }
+
+  public boolean validateStackSequences(int[] pushed, int[] popped) {
+    Stack<Integer> stack = new Stack<>();
+
+    int i = 0;
+    for (int p : pushed) {
+      stack.push(p);
+      while (i < popped.length && !stack.isEmpty() && popped[i] == stack.peek()) {
+        stack.pop();
+        i++;
+      }
+    }
+
+    return i == popped.length;
+  }
+
+  public int[] asteroidCollision(int[] asteroids) {
+    Stack<Integer> stack = new Stack<>();
+    for (int asteroid : asteroids) {
+      boolean destroyed = false;
+
+      while (!stack.isEmpty() && stack.peek() > 0 && asteroid < 0) {
+        int top = stack.pop();
+
+        if (top + asteroid == 0) {
+          destroyed = true;
+          break;
+        } else {
+          asteroid = Math.abs(top) > Math.abs(asteroid) ? top : asteroid;
+        }
+      }
+
+      if (!destroyed) {
+        stack.push(asteroid);
+      }
+    }
+
+    return stack.stream().mapToInt(Integer::intValue).toArray();
+  }
+
+  public static class MinStack {
+
+    private final Stack<int[]> stack;
+
+    public MinStack() {
+      stack = new Stack<>();
+    }
+
+    public void push(int val) {
+      if (stack.isEmpty()) {
+        stack.push(new int[] {val, val});
+      } else {
+        stack.push(new int[] {val, Math.min(stack.peek()[1], val)});
+      }
+    }
+
+    public void pop() {
+      stack.pop();
+    }
+
+    public int top() {
+      return stack.peek()[0];
+    }
+
+    public int getMin() {
+      return stack.peek()[1];
+    }
+  }
+
+  public static class MaxStack {
+    private final Stack<int[]> stack;
+
+    public MaxStack() {
+      stack = new Stack<>();
+    }
+
+    public void push(int val) {
+      if (stack.isEmpty()) {
+        stack.push(new int[] {val, val});
+      } else {
+        stack.push(new int[] {val, Math.max(stack.peek()[1], val)});
+      }
+    }
+
+    public void pop() {
+      stack.pop();
+    }
+
+    public int top() {
+      return stack.peek()[0];
+    }
+
+    public int getMax() {
+      return stack.peek()[1];
+    }
+  }
 }
