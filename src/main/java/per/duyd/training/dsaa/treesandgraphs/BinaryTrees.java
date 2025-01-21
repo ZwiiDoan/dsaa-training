@@ -197,47 +197,6 @@ public class BinaryTrees {
     }
   }
 
-  public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
-    List<Integer> elements1 = new ArrayList<>();
-    getAllElements(root1, elements1);
-    List<Integer> elements2 = new ArrayList<>();
-    getAllElements(root2, elements2);
-
-    List<Integer> allElements = new ArrayList<>();
-    int i = 0, j = 0;
-    while (i < elements1.size() && j < elements2.size()) {
-      int element1 = elements1.get(i);
-      int element2 = elements2.get(j);
-      if (element1 <= element2) {
-        allElements.add(element1);
-        i++;
-      } else {
-        allElements.add(element2);
-        j++;
-      }
-    }
-
-    while (i < elements1.size()) {
-      allElements.add(elements1.get(i));
-      i++;
-    }
-
-    while (j < elements2.size()) {
-      allElements.add(elements2.get(j));
-      j++;
-    }
-
-    return allElements;
-  }
-
-  private void getAllElements(TreeNode node, List<Integer> elements) {
-    if (node != null) {
-      getAllElements(node.left, elements);
-      elements.add(node.val);
-      getAllElements(node.right, elements);
-    }
-  }
-
   public boolean leafSimilar(TreeNode root1, TreeNode root2) {
     if (root1 == null && root2 == null) {
       return true;

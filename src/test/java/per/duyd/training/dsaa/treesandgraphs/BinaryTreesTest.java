@@ -25,13 +25,6 @@ class BinaryTreesTest {
             new TreeNode(8, new TreeNode(1), new TreeNode(3, null, new TreeNode(5)))), 19));
   }
 
-  public static Stream<Arguments> getAllElementsParams() {
-    return Stream.of(Arguments.of("Example 1", new TreeNode(2, new TreeNode(1), new TreeNode(4)),
-            new TreeNode(1, new TreeNode(0), new TreeNode(3)), List.of(0, 1, 1, 2, 3, 4)),
-        Arguments.of("Example 2", new TreeNode(1, null, new TreeNode(8)),
-            new TreeNode(8, new TreeNode(1), null), List.of(1, 1, 8, 8)));
-  }
-
   public static Stream<Arguments> leafSimilarParams() {
     return Stream.of(Arguments.of("Example 1", new TreeNode(3,
             new TreeNode(5, new TreeNode(6), new TreeNode(2, new TreeNode(7), new TreeNode(4))),
@@ -301,12 +294,6 @@ class BinaryTreesTest {
   @MethodSource("searchBSTParams")
   void searchBST(String description, TreeNode root, int val, TreeNode expected) {
     assertTrue(binaryTrees.isSameTree(expected, binaryTrees.searchBST(root, val)));
-  }
-
-  @ParameterizedTest(name = "{0}")
-  @MethodSource("getAllElementsParams")
-  void getAllElements(String description, TreeNode root1, TreeNode root2, List<Integer> expected) {
-    assertIterableEquals(expected, binaryTrees.getAllElements(root1, root2));
   }
 
   @ParameterizedTest(name = "{0}")
